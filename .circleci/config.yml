@@ -1,0 +1,36 @@
+version: 2.1
+
+orbs:
+  slack: circleci/slack@3.4.2
+
+jobs:
+  test:
+    docker:
+      - image: devago/docker-compose
+    environment:
+      REGISTRY_HOST: harbor.dsrd.libraries.psu.edu
+      REGISTRY_URL: harbor.dsrd.libraries.psu.edu/library/scholarsphere-metadata-listener
+      DOCKER_USERNAME: 'robot$circleci'
+    steps:
+    - setup_remote_docker
+    - checkout
+    - run:
+        name: "Build Docker Container"
+        command: |
+          docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
+    - run:
+        name: "RSpec"
+        command: |
+          docker cp test:/app/vendor .
+    - run:
+        name: "Publishing the image"
+        command: |
+          docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $REGISTRY_HOST
+          docker push $REGISTRY_URL:$CIRCLE_SHA1
+
+workflows:
+  version: 2
+  metadata:
+    jobs:
+      - test

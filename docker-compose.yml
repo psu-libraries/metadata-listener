@@ -1,0 +1,23 @@
+version: '3.2'
+services:
+  listener:
+    tty: true
+    stdin_open: true
+    environment:
+      S3_ENDPOINT: http://host.docker.internal:9000
+      AWS_REGION: us-east-1
+      AWS_BUCKET: scholarsphere
+      REDIS_HOST: host.docker.internal
+      REDIS_PASSWORD: redispassword
+      AWS_SECRET_ACCESS_KEY: scholarsphere
+      AWS_ACCESS_KEY_ID: scholarsphere
+    command:
+      - /bin/sleep
+      - "9999999999"
+    build: 
+      context: .
+    volumes:
+    - type: bind
+      consistency: cached
+      source: .
+      target: /app/
