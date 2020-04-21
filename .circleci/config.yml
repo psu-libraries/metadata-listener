@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: devago/docker-compose
+      - image: docker:19.03
     environment:
       REGISTRY_HOST: harbor.dsrd.libraries.psu.edu
       REGISTRY_URL: harbor.dsrd.libraries.psu.edu/library/scholarsphere-metadata-listener
