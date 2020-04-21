@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  test:
+  build:
     docker:
       - image: docker:18.09.3
     environment:
@@ -19,7 +19,7 @@ jobs:
     - run:
         name: "RSpec"
         command: |
-          docker cp test:/app/vendor .
+          docker run $REGISTRY_URL:$CIRCLE_SHA1 /app/bin/rspec
     - run:
         name: "Publishing the image"
         command: |
@@ -31,4 +31,4 @@ workflows:
   version: 2
   metadata:
     jobs:
-      - test
+      - build
