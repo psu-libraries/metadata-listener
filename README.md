@@ -1,14 +1,11 @@
 
 
 
-# listens to a "fits" queue
+# Run 
+Requires scholarsphere to be running, or at the very least a redis instance, and minio instance for the queue to connect to
 
-
-# Configuration
-all configuration is done via environment variables 
+Configuration for the listener is done via environment variables; documented in the docker-compose file
 
 ```
-REDIS_HOST:
-AWS_BUCKET:
-
-
+docker-compose up
+```
