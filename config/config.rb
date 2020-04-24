@@ -34,5 +34,15 @@ class FitsConfig
     def redis_url
       "redis://#{redis_host}:#{redis_port}/#{redis_database}"
     end
+
+    if ENV['DD_AGENT_HOST']
+      require 'ddtrace'
+      Datadog.configure do |c|
+        c.use :sidekiq, analytics_enabled: true
+        c.use :redis
+        c.tracer env: ENV['DD_ENV']
+      end
+    end
+
   end
   

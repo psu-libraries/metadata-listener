@@ -19,3 +19,5 @@ gem "ruby_tika_app", "~> 1.9"
 gem "guard-rspec", "~> 4.7"
 
 gem "nokogiri", "~> 1.10"
+
+gem "ddtrace", "~> 0.34.2"
