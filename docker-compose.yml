@@ -11,9 +11,6 @@ services:
       REDIS_PASSWORD: redispassword
       AWS_SECRET_ACCESS_KEY: scholarsphere
       AWS_ACCESS_KEY_ID: scholarsphere
-    command:
-      - /bin/sleep
-      - "9999999999"
     build: 
       context: .
     volumes:
