@@ -38,7 +38,8 @@ class FitsConfig
     if ENV['DD_AGENT_HOST']
       require 'ddtrace'
       Datadog.configure do |c|
-        c.use :sidekiq, analytics_enabled: true
+        c.use :sidekiq, { analytics_enabled: true, 
+                          service_name: "scholarsphere-metadata-listener" }
         c.use :redis
         c.tracer env: ENV['DD_ENV']
       end
