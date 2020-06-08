@@ -4,7 +4,7 @@ require_relative '../lib/fits'
 require 'nokogiri'
 
 RSpec.describe FitsUtils do
-  let(:fits) { FitsUtils.new }
+  let(:fits) { described_class.new }
 
   it 'Returns an valid XML document' do
     xml = fits.scan_servlet(File.expand_path('./spec/files/1.pdf'))

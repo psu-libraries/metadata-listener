@@ -17,6 +17,10 @@ jobs:
         command: |
           docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
     - run:
+        name: "Niftany"
+        command: |
+          docker run $REGISTRY_URL:$CIRCLE_SHA1 /app/bin/niftany
+    - run:
         name: "RSpec"
         command: |
           docker run $REGISTRY_URL:$CIRCLE_SHA1 /app/bin/rspec

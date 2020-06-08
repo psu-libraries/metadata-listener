@@ -3,24 +3,22 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'activejob', '~> 6.0'
+gem 'aws-sdk-s3', '~> 1.60'
+gem 'ddtrace', '~> 0.36'
+gem 'http'
+gem 'nokogiri', '~> 1.10'
+gem 'ruby_tika_app', '~> 1.9'
 gem 'sidekiq', '~> 6.0'
 
-gem 'activejob', '~> 6.0'
-
-gem 'aws-sdk-s3', '~> 1.60'
-
-gem 'http'
-
-gem 'rspec', '~> 3.9'
+# Development gems
+# Since this isn't a Rails app, there really isn't a functional way to distinguish between dev/test gems and the gems
+# used when this is run in production, so we're just going to list them out here:
 
 gem 'guard', '~> 2.16'
-
-gem 'ruby_tika_app', '~> 1.9'
-
 gem 'guard-rspec', '~> 4.7'
+gem 'niftany'
+gem 'rspec', '~> 3.9'
 
-gem 'nokogiri', '~> 1.10'
-
-gem 'ddtrace', '~> 0.36'
-
-gem 'rubocop', '~> 0.85.1'
+# Niftany needs to be update to work with version 0.84 and later
+gem 'rubocop', '< 0.84'

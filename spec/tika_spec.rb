@@ -3,7 +3,7 @@
 require_relative '../lib/tika'
 
 RSpec.describe Tika do
-  let(:t) { Tika.new }
+  let(:t) { described_class.new }
 
   it 'extracts words from a PDF' do
     expect(t.extract_text(File.expand_path('./spec/files/1.pdf'))).to include('pdftestarticle')
