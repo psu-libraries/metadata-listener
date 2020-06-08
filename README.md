@@ -20,7 +20,7 @@ Requires scholarsphere to be running, or at the very least a redis instance, and
 docker-compose up -d 
 
 # get a terminal 
-./bin/dc-exec 
+./bin/dc-shell
 
 # fire up the listener
 ./start.sh
