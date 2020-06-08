@@ -21,6 +21,6 @@ gem 'guard-rspec', '~> 4.7'
 
 gem 'nokogiri', '~> 1.10'
 
-gem 'ddtrace', '~> 0.34.2'
+gem 'ddtrace', '~> 0.36'
 
 gem 'rubocop', '~> 0.85.1'
