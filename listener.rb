@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq'
 require 'active_job'
 require_relative './lib/s3'
@@ -23,7 +25,7 @@ module Metadata
       logger.info("Downloading file to #{filename}")
       @s3.download_to_file(key, filename)
 
-      logger.info("Running tika")
+      logger.info('Running tika')
       extracted_text = @tika.extract_text(filename)
 
       puts extracted_text
@@ -34,7 +36,6 @@ module Metadata
 
       logger.info('removing temp file')
       File.delete(filename)
-
     end
   end
 end

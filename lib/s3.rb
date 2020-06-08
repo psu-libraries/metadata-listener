@@ -11,9 +11,7 @@ class S3Downloader
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       region: ENV['AWS_REGION']
     }
-    if ENV.key?('S3_ENDPOINT')
-      s3_options = s3_options.merge(endpoint: ENV['S3_ENDPOINT'], force_path_style: true)
-    end
+    s3_options = s3_options.merge(endpoint: ENV['S3_ENDPOINT'], force_path_style: true) if ENV.key?('S3_ENDPOINT')
     Aws.config.update(s3_options)
   end
 
