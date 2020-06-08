@@ -35,3 +35,8 @@ from outside the container:
 ```
 ./bin/dc-rspec
 ```
+
+# Stop developing and go home for the day
+```
+docker-compose down
+```
