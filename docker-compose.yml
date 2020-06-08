@@ -1,16 +1,19 @@
 version: '3.2'
 services:
   listener:
+    command:
+    - sleep
+    - "9999999999"
     tty: true
     stdin_open: true
     environment:
-      S3_ENDPOINT: http://host.docker.internal:9000
-      AWS_REGION: us-east-1
-      AWS_BUCKET: scholarsphere
-      REDIS_HOST: host.docker.internal
-      REDIS_PASSWORD: redispassword
-      AWS_SECRET_ACCESS_KEY: scholarsphere
-      AWS_ACCESS_KEY_ID: scholarsphere
+      S3_ENDPOINT: ${S3_ENDPOINT}
+      AWS_REGION: ${AWS_REGION}
+      AWS_BUCKET: ${AWS_BUCKET}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
     build: 
       context: .
     volumes:

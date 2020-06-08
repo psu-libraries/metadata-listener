@@ -1,0 +1,7 @@
+export S3_ENDPOINT=http://host.docker.internal:9000
+export AWS_REGION=us-east-1
+export AWS_BUCKET=scholarsphere
+export REDIS_HOST=host.docker.internal
+export REDIS_PASSWORD=redispassword
+export AWS_SECRET_ACCESS_KEY=scholarsphere
+export AWS_ACCESS_KEY_ID=scholarsphere
