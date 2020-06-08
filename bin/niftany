@@ -1,0 +1,3 @@
+#!/bin/bash
+# Wrapper for Niftany, but we only need to run Rubocop
+bundle exec rubocop

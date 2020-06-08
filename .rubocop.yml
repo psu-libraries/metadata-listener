@@ -1,0 +1,21 @@
+inherit_gem:
+  niftany: 
+   - niftany_rubocop_rspec.yml                                                                                           
+   - niftany_rubocop_ruby.yml 
+
+inherit_from:
+  - .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.6.6
+  Exclude:
+    - 'tmp/**/*'
+    - 'bin/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Guardfile'
+    - 'spec/**/*'
+
+RSpec/AnyInstance:
+  Enabled: false

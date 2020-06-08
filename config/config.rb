@@ -44,4 +44,4 @@ class FitsConfig
       c.tracer env: ENV['DD_ENV']
     end
   end
-  end
+end
