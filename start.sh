@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "starting FITS Servlet"
 
+bundle check || bundle
+
 # TODO log to stdout somehow
 pgrep java || /usr/share/tomcat9/bin/startup.sh
 
