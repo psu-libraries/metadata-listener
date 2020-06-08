@@ -1,0 +1,1 @@
+docker-compose exec listener bundle exec guard
