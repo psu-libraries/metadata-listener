@@ -5,10 +5,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'activejob', '~> 6.0'
 gem 'aws-sdk-s3', '~> 1.60'
+gem 'clamby', '~> 1.6'
 gem 'ddtrace', '~> 0.36'
 gem 'http'
 gem 'nokogiri', '~> 1.10'
 gem 'ruby_tika_app', '~> 1.9'
+gem 'rufus-scheduler', '~> 3.6'
 gem 'sidekiq', '~> 6.0'
 
 # Development gems
