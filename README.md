@@ -12,6 +12,14 @@ cp .envrc.sample .envrc
 source .envrc
 ```
 
+# Build
+Occasionally you'll need to rebuild the container, it's a good idea to rebuild anytime the Dockerfile changes, it's been awhile since your last rebuild, or there's been massive changes to your gemfile. It's always good to test that building still works. 
+
+```
+docker-compose build
+# or as one single step to build & run
+docker-compuse up --build -d
+```
 
 # Run 
 Requires scholarsphere to be running, or at the very least a redis instance, and minio instance for the queue to connect to
