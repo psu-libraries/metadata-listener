@@ -19,6 +19,7 @@ gem 'guard', '~> 2.16'
 gem 'guard-rspec', '~> 4.7'
 gem 'niftany'
 gem 'rspec', '~> 3.9'
+gem 'simplecov', '0.17.1', require: false
 
 # Niftany needs to be update to work with version 0.84 and later
 gem 'rubocop', '< 0.84'

@@ -16,6 +16,7 @@ services:
       context: .
     volumes:
     - var-lib-clamav:/var/lib/clamav
+    - bundle-data:/app/vendor/bundle
     - type: bind
       consistency: cached
       source: .
@@ -23,3 +24,4 @@ services:
 
 volumes:
   var-lib-clamav:
+  bundle-data:
