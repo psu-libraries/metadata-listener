@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../lib/fits'
 require 'nokogiri'
 
-RSpec.describe FitsUtils do
+RSpec.describe MetadataListener::FitsUtils do
   let(:fits) { described_class.new }
 
   it 'Returns an valid XML document' do
