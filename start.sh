@@ -1,8 +1,4 @@
 #!/bin/bash
-echo "starting FITS Servlet"
-
-bundle check || bundle
-
 # TODO log to stdout somehow
 pgrep java || /usr/share/tomcat9/bin/startup.sh
 
@@ -12,4 +8,13 @@ then
   echo "fits never became ready. Exiting"
   exit 1
 fi
-bundle exec sidekiq -C config/sidekiq.yml -r ./listener.rb -vv
+
+if [ ${ENV:-production} == "development" ]; then
+  echo "Checking Bundle"
+  bundle check || bundle install
+  echo "Sleeping Forever"
+  sleep infinity
+else
+  echo "Starting Sidekiq"
+  bundle exec sidekiq -C config/sidekiq.yml -r ./listener.rb -vv
+fi
