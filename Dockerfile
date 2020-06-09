@@ -16,6 +16,8 @@ RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
     echo "TCPSocket 3310" >> /etc/clamav/clamd.conf && \
     sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf
 
+RUN freshclam
+
 # FITS!
 RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip
 
@@ -43,6 +45,7 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock /app/
 RUN gem install bundler
+RUN bundle config set path vendor/bundle
 RUN bundle install
 
 COPY . /app/
