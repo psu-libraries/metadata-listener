@@ -2,11 +2,13 @@
 
 require 'rufus-scheduler'
 require 'clamby'
+require_relative '../config/log'
 
 scheduler = Rufus::Scheduler.new
+logger = Logger.new(STDOUT)
 
-scheduler.every '2h' do
-  puts 'updating av definitions'
+scheduler.every '1m' do
+  logger.info('Updating ClamAV Database')
   Clamby.update
 end
 

@@ -5,6 +5,7 @@ require 'active_job'
 require_relative './lib/s3'
 require_relative './lib/fits'
 require_relative './lib/tika'
+require_relative './lib/clam'
 require_relative './config/config'
 
 FitsConfig.new
