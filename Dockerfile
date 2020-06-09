@@ -5,8 +5,16 @@ ENV LANG=C.UTF-8
 
 # System packages
 RUN apt-get update && \
-  apt-get install --no-install-recommends libstdc++6 libffi-dev wget libpng-dev make curl unzip -y && \
+  apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip -y && \
   rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /var/run/clamav && \
+    chown clamav:clamav /var/run/clamav && \
+    chmod 750 /var/run/clamav
+
+RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
+    echo "TCPSocket 3310" >> /etc/clamav/clamd.conf && \
+    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf
 
 # FITS!
 RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip
