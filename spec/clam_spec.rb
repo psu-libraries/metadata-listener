@@ -9,6 +9,7 @@ RSpec.describe ClamUtils do
     virus = clam.scan(File.expand_path('./spec/files/1.pdf'))
     expect(virus).to be false
   end
+
   it 'Rerturns a Virus' do
     virus = clam.scan(File.expand_path('./spec/files/eicar_com.zip'))
     expect(virus).to be true
