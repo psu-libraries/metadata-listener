@@ -9,6 +9,9 @@ then
   exit 1
 fi
 
+echo "Updating Virus Definitaions"
+freshclam &
+
 if [ ${ENV:-production} == "development" ]; then
   echo "Checking Bundle"
   bundle check || bundle install
