@@ -2,7 +2,6 @@
 
 require 'rufus-scheduler'
 require 'clamby'
-require_relative '../config/log'
 
 scheduler = Rufus::Scheduler.new
 
