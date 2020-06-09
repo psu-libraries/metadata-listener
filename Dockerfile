@@ -46,8 +46,4 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /app/
-CMD [ "/app/start.sh" ]
-
-
-
-
+CMD [ "/app/entrypoint.sh" ]
