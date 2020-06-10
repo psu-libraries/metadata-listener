@@ -2,6 +2,10 @@
 
 require 'sidekiq'
 require_relative './lib/metadata_listener/redis'
+require_relative './lib/metadata_listener/job'
+require_relative './lib/metadata_listener/s3_downloader'
+require_relative './lib/metadata_listener/fits_utils'
+require_relative './lib/metadata_listener/tika'
 
 ::Sidekiq.configure_client do |config|
   config.redis = MetadataListener::Redis.config
