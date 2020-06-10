@@ -12,10 +12,17 @@ jobs:
     - setup_remote_docker:
         version: 18.09.3
     - checkout
+    - restore_cache:
+        keys:
+          - bundle-{{ checksum "Gemfile.lock" }}
     - run:
         name: "Build Docker Container"
         command: |
           docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
+    - save_cache:
+        paths:
+          - vendor/bundle
+        key: bundle-{{ checksum "Gemfile.lock" }}
     - run:
         name: "Niftany"
         command: |

@@ -45,6 +45,7 @@ RUN curl -Lo /usr/share/tomcat9/webapps/fits.war https://projects.iq.harvard.edu
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock /app/
+ADD vendor/ vendor/
 RUN gem install bundler
 RUN bundle config set path vendor/bundle
 RUN bundle install
