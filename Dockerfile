@@ -35,6 +35,7 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock /app/
 RUN gem install bundler
+RUN bundle config set path vendor/bundle
 RUN bundle install
 
 COPY . /app/
