@@ -16,5 +16,5 @@ if [ ${ENV:-production} == "development" ]; then
   sleep infinity
 else
   echo "Starting Sidekiq"
-  bundle exec sidekiq -C config/sidekiq.yml -r ./listener.rb -vv
+  bin/sidekiq -C config/sidekiq.yml -r ./sidekiq.rb -vv
 fi

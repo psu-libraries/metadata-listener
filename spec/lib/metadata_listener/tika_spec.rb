@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/tika'
-
-RSpec.describe Tika do
+RSpec.describe MetadataListener::Tika do
   let(:t) { described_class.new }
 
   it 'extracts words from a PDF' do
