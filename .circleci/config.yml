@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: docker:18.09.3
+      - image: devago/docker-compose
     environment:
       REGISTRY_HOST: harbor.dsrd.libraries.psu.edu
       REGISTRY_URL: harbor.dsrd.libraries.psu.edu/library/scholarsphere-metadata-listener
@@ -12,6 +12,12 @@ jobs:
     - setup_remote_docker:
         version: 18.09.3
     - checkout
+    - run:
+        name: "Start Dependencies"
+        background: true
+        command: |
+          docker-compose pull minio 
+          docker-compose up -d minio 
     - run:
         name: "Build Docker Container"
         command: |
@@ -23,7 +29,15 @@ jobs:
     - run:
         name: "RSpec"
         command: |
-          docker run -e CC_TEST_REPORTER_ID=${CC_TEST_REPORTER_ID} -e GIT_COMMIT_SHA=${CIRCLE_SHA1} -e GIT_BRANCH=${CIRCLE_BRANCH} $REGISTRY_URL:$CIRCLE_SHA1 /app/bin/rspec-ci
+          docker run\
+            -e CC_TEST_REPORTER_ID=${CC_TEST_REPORTER_ID}\
+            -e GIT_COMMIT_SHA=${CIRCLE_SHA1}\
+            -e GIT_BRANCH=${CIRCLE_BRANCH}\
+            -e S3_ENDPOINT=http://minio:9000\
+            -e AWS_BUCKET=listener\
+            -e AWS_ACCESS_KEY_ID=listener\
+            -e AWS_SECRET_ACCESS_KEY=listener\
+            $REGISTRY_URL:$CIRCLE_SHA1 /app/bin/rspec-ci
     - run:
         name: "Publishing the image"
         command: |

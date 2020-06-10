@@ -4,13 +4,13 @@ services:
     tty: true
     stdin_open: true
     environment:
-      S3_ENDPOINT: ${S3_ENDPOINT}
-      AWS_REGION: ${AWS_REGION}
-      AWS_BUCKET: ${AWS_BUCKET}
+      S3_ENDPOINT: http://minio:9000
+      AWS_REGION: us-east-1
+      AWS_BUCKET: listener
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-listener}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
     command: |
       /bin/bash -c 
       "bundle check || bundle install && 
@@ -24,7 +24,22 @@ services:
       consistency: cached
       source: .
       target: /app/
+  minio:
+    image: minio/minio:latest
+    restart: always
+    volumes:
+      - minio-data:/data
+    environment: 
+      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-listener}
+      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
+    ports:
+      - ${MINIO_PORT:-9000}:9000
+    entrypoint:
+      - /bin/sh
+      - -c 
+      - mkdir -p /data/listener; minio --compat server --address ':9000' /data
 
 volumes:
   var-lib-clamav:
   bundle-data:
+  minio-data:
