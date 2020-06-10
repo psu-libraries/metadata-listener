@@ -19,7 +19,8 @@ jobs:
         name: "Build Docker Container"
         command: |
           docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
-          docker cp $REGISTRY_URL:$CIRCLE_SHA1:/app/vendor .
+          docker run --name cache $REGISTRY_URL:$CIRCLE_SHA1 /bin/sh
+          docker cp cache:/app/vendor .
     - save_cache:
         paths:
           - vendor/bundle
