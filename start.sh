@@ -9,12 +9,5 @@ then
   exit 1
 fi
 
-if [ ${ENV:-production} == "development" ]; then
-  echo "Checking Bundle"
-  bundle check || bundle install
-  echo "Sleeping Forever"
-  sleep infinity
-else
-  echo "Starting Sidekiq"
-  bin/sidekiq -C config/sidekiq.yml -r ./sidekiq.rb -vv
-fi
+echo "Starting Sidekiq"
+bin/sidekiq -C config/sidekiq.yml -r ./sidekiq.rb -vv
