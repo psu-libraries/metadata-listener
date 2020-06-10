@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
-require 'sidekiq'
 require 'active_job'
-require_relative './lib/s3'
-require_relative './lib/fits'
-require_relative './lib/tika'
-require_relative './config/config'
 
-FitsConfig.new
-
-module Metadata
+module MetadataListener
   class Job < ActiveJob::Base
     def initialize
       @tmpdir = ENV.fetch('TMPDIR', '/tmp')

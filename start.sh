@@ -12,4 +12,4 @@ then
   echo "fits never became ready. Exiting"
   exit 1
 fi
-bundle exec sidekiq -C config/sidekiq.yml -r ./listener.rb -vv
+bin/sidekiq -C config/sidekiq.yml -r ./sidekiq.rb -vv
