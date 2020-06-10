@@ -1,9 +1,6 @@
 version: '3.2'
 services:
   listener:
-    command:
-    - sleep
-    - "9999999999"
     tty: true
     stdin_open: true
     environment:
@@ -17,6 +14,7 @@ services:
     build: 
       context: .
     volumes:
+    - var-lib-clamav:/var/lib/clamav
     - bundle-data:/app/vendor/bundle
     - type: bind
       consistency: cached
@@ -24,4 +22,5 @@ services:
       target: /app/
 
 volumes:
+  var-lib-clamav:
   bundle-data:

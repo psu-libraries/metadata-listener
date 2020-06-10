@@ -1,8 +1,4 @@
 #!/bin/bash
-echo "starting FITS Servlet"
-
-bundle check || bundle
-
 # TODO log to stdout somehow
 pgrep java || /usr/share/tomcat9/bin/startup.sh
 
@@ -12,4 +8,6 @@ then
   echo "fits never became ready. Exiting"
   exit 1
 fi
+
+echo "Starting Sidekiq"
 bin/sidekiq -C config/sidekiq.yml -r ./sidekiq.rb -vv
