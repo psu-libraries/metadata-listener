@@ -44,6 +44,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     builder (3.2.4)
+    clamby (1.6.5)
     coderay (1.1.3)
     colorize (0.8.1)
     concurrent-ruby (1.1.6)
@@ -216,6 +217,7 @@ PLATFORMS
 DEPENDENCIES
   activejob (~> 6.0)
   aws-sdk-s3 (~> 1.60)
+  clamby (~> 1.6)
   ddtrace (~> 0.36)
   guard (~> 2.16)
   guard-rspec (~> 4.7)

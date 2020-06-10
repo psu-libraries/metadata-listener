@@ -6,4 +6,5 @@ module MetadataListener
   require 'metadata_listener/s3_downloader'
   require 'metadata_listener/fits_utils'
   require 'metadata_listener/tika'
+  require 'metadata_listener/clam'
 end
