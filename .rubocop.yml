@@ -12,6 +12,7 @@ AllCops:
     - 'vendor/**/*'
     - 'tmp/**/*'
     - 'bin/**/*'
+    - 'spec/support/spec_helpers.rb' # Rubocop bug
 
 Metrics/BlockLength:
   Exclude:
