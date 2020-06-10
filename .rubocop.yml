@@ -9,6 +9,7 @@ inherit_from:
 AllCops:
   TargetRubyVersion: 2.6.6
   Exclude:
+    - 'vendor/**/*'
     - 'tmp/**/*'
     - 'bin/**/*'
 

@@ -11,6 +11,10 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+    command: |
+      /bin/bash -c 
+      "bundle check || bundle install && 
+      /app/entrypoint.sh"
     build: 
       context: .
     volumes:
