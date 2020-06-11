@@ -24,7 +24,7 @@ jobs:
         name: "RSpec"
         command: |
           export TAG=$CIRCLE_SHA1
-          docker-compose -f docker-compose.yml -f docker-compose-test.yml run --name test --service-ports test /app/bin/rspec-ci -p test
+          docker-compose -f docker-compose.yml -f docker-compose-test.yml run --name ci --service-ports test /app/bin/rspec-ci -p ci
     - run:
         name: "Publishing the image"
         command: |
