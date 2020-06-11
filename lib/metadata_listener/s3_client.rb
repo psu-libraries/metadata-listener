@@ -1,27 +1,33 @@
 # frozen_string_literal: true
 
 require 'aws-sdk-s3'
-require 'fileutils'
 
 module MetadataListener
-  class S3Downloader
+  class S3Client
     def initialize
-      return unless s3_options[:access_key_id].present?
+      raise ArgumentError, 'S3 configuration is missing required options' unless valid?
 
       Aws.config.update(s3_options)
     end
 
-    def download_to_file(key, filename)
-      s3 = Aws::S3::Client.new
-      File.open(filename, 'wb') do |file|
-        return s3.get_object({ bucket: bucket, key: key }, target: file)
-      end
+    # @param [String] key
+    # @return [Seahorse::Client::Response]
+    def download_file(key)
+      client.get_object(bucket: bucket, key: key, response_target: Tempfile.new)
     end
 
     private
 
+      def valid?
+        bucket.present? && s3_options.none? { |_key, value| value.nil? }
+      end
+
+      def client
+        @client ||= Aws::S3::Client.new
+      end
+
       def bucket
-        @bucket ||= ENV.fetch('AWS_BUCKET')
+        @bucket ||= ENV['AWS_BUCKET']
       end
 
       def s3_options
@@ -36,7 +42,7 @@ module MetadataListener
         {
           access_key_id: ENV['AWS_ACCESS_KEY_ID'],
           secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-          region: ENV['AWS_REGION']
+          region: ENV.fetch('AWS_REGION', 'us-east-1')
         }
       end
   end
