@@ -3,6 +3,8 @@ services:
   test:
     tty: true
     stdin_open: true
+    depends_on:
+    - minio
     environment:
       CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
       S3_ENDPOINT: http://minio:9000
@@ -16,3 +18,15 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-listener}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
     image: harbor.dsrd.libraries.psu.edu/library/scholarsphere-metadata-listener:$TAG
+  minio:
+    image: minio/minio:latest
+    restart: always
+    environment: 
+      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-listener}
+      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
+    ports:
+      - ${MINIO_PORT:-9000}:9000
+    entrypoint:
+      - /bin/sh
+      - -c 
+      - mkdir -p /data/listener; minio --compat server --address ':9000' /data
