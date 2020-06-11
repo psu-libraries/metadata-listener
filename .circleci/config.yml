@@ -13,12 +13,6 @@ jobs:
         version: 18.09.3
     - checkout
     - run:
-        name: "Start Dependencies"
-        background: true
-        command: |
-          docker-compose pull minio 
-          docker-compose up -d minio 
-    - run:
         name: "Build Docker Container"
         command: |
           docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
