@@ -16,4 +16,4 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-listener}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
-    image: harbor.dsrd.libraries.psu.edu/library/scholarsphere-metadata-listener:$TAG
+    image: $REGISTRY_URL:$TAG
