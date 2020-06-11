@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: devago/docker-compose
     environment:
-      REGISTRY_HOST: harbor.dsrd.libraries.psu.edu
-      REGISTRY_URL: harbor.dsrd.libraries.psu.edu/library/scholarsphere-metadata-listener
+      REGISTRY_HOST: harbor.k8s.libraries.psu.edu
+      REGISTRY_URL: harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener
       DOCKER_USERNAME: 'robot$circleci'
     steps:
     - setup_remote_docker:
