@@ -7,12 +7,11 @@ services:
     - minio
     environment:
       CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
-      S3_ENDPOINT: http://minio:9000
       GIT_COMMIT_SHA: ${CIRCLE_SHA1}
       GIT_BRANCH: ${CIRCLE_BRANCH}
-      S3_ENDPOINT: http://minio:9000
-      AWS_REGION: us-east-1
-      AWS_BUCKET: listener
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://minio:9000}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      AWS_BUCKET: ${AWS_BUCKET:-listener}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-listener}
