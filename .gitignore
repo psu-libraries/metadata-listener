@@ -1,4 +1,8 @@
 tmp
 .envrc
+.bash_history
+.vscode/
 coverage
 cc-test-reporter
+.bundle
+vendor/
