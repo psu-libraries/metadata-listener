@@ -7,6 +7,7 @@ gem 'activejob', '~> 6.0'
 gem 'aws-sdk-s3', '~> 1.60'
 gem 'clamby', '~> 1.6'
 gem 'ddtrace', '~> 0.36'
+gem 'faraday'
 gem 'http'
 gem 'nokogiri', '~> 1.10'
 gem 'ruby_tika_app', '~> 1.9'
@@ -23,6 +24,8 @@ gem 'pry'
 gem 'rspec', '~> 3.9'
 gem 'rspec-its', '~> 1.3'
 gem 'simplecov', '0.17.1', require: false
+gem 'vcr', require: false
+gem 'webmock', require: false
 
 # Niftany needs to be update to work with version 0.84 and later
 gem 'rubocop', '< 0.84'

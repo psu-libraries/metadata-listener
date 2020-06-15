@@ -4,31 +4,14 @@ require 'active_job'
 
 module MetadataListener
   class Job < ActiveJob::Base
-    def initialize
-      @tmpdir = ENV.fetch('TMPDIR', '/tmp')
-      @s3 = S3Downloader.new
-      @fits = FitsUtils.new
-      @tika = Tika.new
-    end
+    queue_as :metadata
 
-    def perform(file_data)
-      key = "#{file_data['storage']}/#{file_data['id']}"
-      filename = "#{@tmpdir}/#{Digest::MD5.hexdigest(key)}"
-
-      logger.info("Downloading file to #{filename}")
-      @s3.download_to_file(key, filename)
-
-      logger.info('Running tika')
-      extracted_text = @tika.extract_text(filename)
-
-      puts extracted_text
-
-      logger.info('Running FITS')
-      fits_xml = @fits.scan_servlet(filename)
-      puts fits_xml
-
-      logger.info('removing temp file')
-      File.delete(filename)
+    # @param [String] path indicating where the file is stored in S3
+    # @option [String] endpoint to send results to
+    # @option [String] api_token used to authenticate with endpoint
+    def perform(path:, endpoint: nil, api_token: nil)
+      file = MetadataListener.s3_client.download_file(path)
+      VirusReportingService.call(path: file.body.path, endpoint: endpoint, api_token: api_token)
     end
   end
 end
