@@ -6,5 +6,5 @@ module MetadataListener
   require 'metadata_listener/s3_client'
   require 'metadata_listener/fits_utils'
   require 'metadata_listener/tika'
-  require 'metadata_listener/clam'
+  require 'metadata_listener/clamav_service'
 end

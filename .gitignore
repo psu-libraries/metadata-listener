@@ -2,3 +2,4 @@ tmp
 .envrc
 coverage
 cc-test-reporter
+vendor
