@@ -27,11 +27,10 @@ RSpec.describe MetadataListener::S3Client do
 
     context 'when the file is available in S3' do
       let(:sample_file) { fixture_path.join('1.pdf') }
-
-      let(:file_key) { upload_file(sample_file) }
+      let(:file_data) { upload_file(file: sample_file) }
 
       it 'downloads the file to a temporary location' do
-        new_file = downloader.download_file(file_key)
+        new_file = downloader.download_file("#{file_data[:storage]}/#{file_data[:id]}")
         expect(Digest::MD5.hexdigest(new_file.body.read)).to eq(Digest::MD5.hexdigest(sample_file.read))
       end
     end
