@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'sidekiq'
-require_relative './lib/metadata_listener/redis'
+Dir[Pathname.pwd.join('lib', 'metadata_listener', '**', '*.rb')].sort.each { |f| require f }
 
 ::Sidekiq.configure_client do |config|
   config.redis = MetadataListener::Redis.config
