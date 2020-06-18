@@ -5,6 +5,7 @@ ENV LANG=C.UTF-8
 
 # System packages
 RUN apt-get update && \
+  apt-get upgrade -y && \
   apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip -y && \
   rm -rf /var/lib/apt/lists/*
 
