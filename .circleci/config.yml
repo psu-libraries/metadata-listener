@@ -15,7 +15,10 @@ jobs:
     - run:
         name: "Build Docker Container"
         command: |
-          docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
+          echo "export BASE_HASH=`git rev-list --max-count=1 HEAD Gemfile Gemfile.lock Dockerfile|sha256sum|cut -c1-8`" >> $BASH_ENV
+          source $BASH_ENV
+          docker pull $REGISTRY_URL:$BASE_HASH || docker build -t $REGISTRY_URL:$BASE_HASH . 
+          docker build --build-arg BASE_HASH=${BASE_HASH} -t $REGISTRY_URL:$CIRCLE_SHA1 -f Dockerfile-ci .
     - run:
         name: "Niftany"
         command: |
@@ -28,7 +31,9 @@ jobs:
     - run:
         name: "Publishing the image"
         command: |
+          source $BASH_ENV
           docker login -u $DOCKER_USERNAME -p $HARBOR_PASSWORD $REGISTRY_HOST
+          docker push $REGISTRY_URL:$BASE_HASH
           docker push $REGISTRY_URL:$CIRCLE_SHA1
 
 workflows:
