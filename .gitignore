@@ -3,3 +3,5 @@ tmp
 coverage
 cc-test-reporter
 vendor
+/log/*
+!/log/.keep
