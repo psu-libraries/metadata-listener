@@ -45,6 +45,7 @@ RUN curl -Lo /usr/share/tomcat9/webapps/fits.war https://projects.iq.harvard.edu
 
 RUN chown -R clamav /usr/share/tomcat9
 RUN chown -R clamav /etc/tomcat9
+RUN chown -R clamav /app
 
 USER clamav
 WORKDIR /app
