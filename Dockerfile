@@ -46,10 +46,9 @@ RUN curl -Lo /usr/share/tomcat9/webapps/fits.war https://projects.iq.harvard.edu
 RUN chown -R clamav /usr/share/tomcat9
 RUN chown -R clamav /etc/tomcat9
 
-USER clamav
 WORKDIR /app
+USER clamav
 
-RUN chown -R clamav /app
 
 COPY --chown=clamav Gemfile Gemfile.lock /app/
 RUN gem install bundler
