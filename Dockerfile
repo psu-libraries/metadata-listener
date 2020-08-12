@@ -53,10 +53,10 @@ USER clamav
 
 COPY --chown=clamav Gemfile Gemfile.lock /app/
 RUN gem install bundler
-#RUN bundle config set path vendor/bundle
-#RUN bundle install && \
-#  rm -rf /app/.bundle/cache && \
-#  rm -rf /app/vendor/bundle/ruby/*/cache
+RUN bundle config set path vendor/bundle
+RUN bundle install && \
+  rm -rf /app/.bundle/cache && \
+  rm -rf /app/vendor/bundle/ruby/*/cache
 
 COPY --chown=clamav . /app/
 CMD [ "/app/entrypoint.sh" ]
