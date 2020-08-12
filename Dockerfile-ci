@@ -1,5 +1,5 @@
 ARG BASE_HASH=latest
 FROM harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener:${BASE_HASH}
 
-COPY . /app/
+COPY --chown=clamav . /app/
 CMD [ "/app/entrypoint.sh" ]
