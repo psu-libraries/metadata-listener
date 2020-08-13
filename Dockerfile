@@ -41,7 +41,7 @@ RUN echo 'fits.home=/usr/share/fits' >> /usr/share/tomcat9/conf/catalina.propert
   && echo 'shared.loader=${fits.home}/lib/*.jar' >> /usr/share/tomcat9/conf/catalina.properties \
   && mkdir /usr/share/tomcat9/webapps \
   && mkdir /usr/share/tomcat9/logs \
-  && RUN curl -Lo /usr/share/tomcat9/webapps/fits.war https://projects.iq.harvard.edu/files/fits/files/fits-1.2.1.war
+  && curl -Lo /usr/share/tomcat9/webapps/fits.war https://projects.iq.harvard.edu/files/fits/files/fits-1.2.1.war
 
 RUN chown -R clamav /usr/share/tomcat9 \
   && chown -R clamav /etc/tomcat9 \
