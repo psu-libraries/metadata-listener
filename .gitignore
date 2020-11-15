@@ -6,3 +6,6 @@ coverage
 cc-test-reporter
 .bundle
 vendor/
+vendor
+/log/*
+!/log/.keep

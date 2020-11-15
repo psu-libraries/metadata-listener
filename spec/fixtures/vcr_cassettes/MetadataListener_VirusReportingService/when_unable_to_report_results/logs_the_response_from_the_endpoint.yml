@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://scholarsphere-4.test/api/v1/metadata/1
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"virus":{"status":false,"scanned_at":"2020-06-17 15:19:38
+        -0400"}}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - d40221f7-2adb-430a-8bf1-45f7d683edb9
+      X-Runtime:
+      - '0.166863'
+      X-Xss-Protection:
+      - 1; mode=block
+      Date:
+      - Wed, 17 Jun 2020 19:19:53 GMT
+      Content-Length:
+      - '96'
+    body:
+      encoding: UTF-8
+      string: '{"message":"401: Request not authorized. Please provide a valid API
+        key for access.","code":401}'
+  recorded_at: Wed, 17 Jun 2020 19:19:53 GMT
+recorded_with: VCR 6.0.0

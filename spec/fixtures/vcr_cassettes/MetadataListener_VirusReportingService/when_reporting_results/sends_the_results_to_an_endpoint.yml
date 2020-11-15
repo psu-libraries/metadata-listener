@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://scholarsphere-4.test/api/v1/metadata/1
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"virus":{"status":false,"scanned_at":"2020-06-16 21:57:32
+        -0400"}}}'
+    headers:
+      Content-Type:
+      - application/json
+      X-Api-Key:
+      - xxxxxx
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"dc26fdcdd57abac4c20b12f6635117e7"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Request-Id:
+      - e8c4065b-4bb2-475d-a6ba-2e37af6e569c
+      X-Runtime:
+      - '0.010555'
+      X-Xss-Protection:
+      - 1; mode=block
+      Date:
+      - Wed, 17 Jun 2020 01:57:33 GMT
+      Content-Length:
+      - '43'
+    body:
+      encoding: UTF-8
+      string: '{"message":"File was successfully updated"}'
+  recorded_at: Wed, 17 Jun 2020 01:57:33 GMT
+recorded_with: VCR 6.0.0
