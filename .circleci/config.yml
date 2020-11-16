@@ -1,6 +1,20 @@
 version: 2.1
 
 jobs:
+  release_image:
+    docker:
+      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:v1.0.6
+    environment:
+      REGISTRY_HOST: harbor.k8s.libraries.psu.edu
+      REGISTRY_REPO: library/scholarsphere-metadata-listener
+      DOCKER_USERNAME: 'robot$circleci'
+      GITHUB_USER: 'psu-stewardship-bot'
+    steps:
+      - add_ssh_keys
+      - run:
+          name: "Release"
+          command: |
+            /usr/local/bin/tag-image
   build:
     docker:
       - image: devago/docker-compose
@@ -41,3 +55,12 @@ workflows:
   metadata:
     jobs:
       - build
+      - release_image:
+          name: "release image"
+          filters:
+            tags:
+              only:
+                - /^v\d+.\d+.\d+.*/
+            branches:
+              ignore:
+                - /.*/
