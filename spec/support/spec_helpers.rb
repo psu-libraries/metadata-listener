@@ -2,7 +2,7 @@
 
 module SpecHelpers
   def fixture_path
-    Pathname.pwd.join('spec/files')
+    Pathname.pwd.join('spec/fixtures')
   end
 
   # @return [String] path to uploaded file in S3
