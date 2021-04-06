@@ -4,21 +4,25 @@ require 'ruby_tika_app'
 
 module MetadataListener
   class Tika
-    def extract_text(filename)
-      rta = RubyTikaApp.new(filename)
-      rta.to_text.gsub(/\n+/, ' ')
+    attr_reader :rta
+
+    # @param [String] path of file to scan
+    def initialize(path)
+      @rta = RubyTikaApp.new(path)
     end
 
-    def extract_metadata(filename)
-      metadata = {}
-      rta = RubyTikaApp.new(filename)
-      rta.to_metadata.split("\n").each do |line|
-        this_obj = {}
-        things = line.reverse.split(':', 2).map(&:reverse).reverse
-        this_obj[things[0]] = things[1]
-        metadata.merge!(this_obj)
-      end
-      puts metadata
+    def text
+      @text ||= rta.to_text.gsub(/\n+/, ' ')
     end
+
+    def metadata
+      Hash[elements.map { |element| element.split(': ') }]
+    end
+
+    private
+
+      def elements
+        @elements ||= rta.to_metadata.split("\n")
+      end
   end
 end
