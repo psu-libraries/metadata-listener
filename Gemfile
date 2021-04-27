@@ -29,3 +29,5 @@ gem 'webmock', require: false
 
 # Niftany needs to be update to work with version 0.84 and later
 gem 'rubocop', '< 0.84'
+
+gem "webrick", "~> 1.7"

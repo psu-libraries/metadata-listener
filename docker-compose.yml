@@ -14,7 +14,7 @@ services:
     command: |
       /bin/bash -c 
       "bundle check || bundle install && 
-      /app/entrypoint.sh"
+      /app/bin/startup"
     build: 
       context: .
     volumes:
