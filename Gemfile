@@ -23,11 +23,11 @@ gem 'niftany'
 gem 'pry'
 gem 'rspec', '~> 3.9'
 gem 'rspec-its', '~> 1.3'
-gem 'simplecov', '0.17.1', require: false
+gem 'simplecov', '0.21.2', require: false
 gem 'vcr', require: false
 gem 'webmock', require: false
 
 # Niftany needs to be update to work with version 0.84 and later
-gem 'rubocop', '< 0.84'
+gem 'rubocop', '~> 0.84'
 
 gem 'webrick', '~> 1.7'
