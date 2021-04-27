@@ -17,13 +17,14 @@ jobs:
             /usr/local/bin/tag-image
   build:
     docker:
-      - image: devago/docker-compose
+      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:v1.0.6
     environment:
       REGISTRY_HOST: harbor.k8s.libraries.psu.edu
       REGISTRY_URL: harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener
       DOCKER_USERNAME: 'robot$circleci'
     steps:
     - setup_remote_docker:
+        docker_layer_caching: true
         version: 19.03.12
     - checkout
     - run:
