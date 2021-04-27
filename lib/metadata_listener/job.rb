@@ -7,11 +7,25 @@ module MetadataListener
     queue_as :metadata
 
     # @param [String] path indicating where the file is stored in S3
-    # @option [String] endpoint to send results to
-    # @option [String] api_token used to authenticate with endpoint
-    def perform(path:, endpoint: nil, api_token: nil)
+    # @param [String] endpoint to send results to
+    # @param [String] api_token used to authenticate with endpoint
+    # @param [Array<Symbol>] services to run, defaults to []
+    def perform(path:, endpoint: nil, api_token: nil, services: [])
       file = MetadataListener.s3_client.download_file(path)
-      VirusReportingService.call(path: file.body.path, endpoint: endpoint, api_token: api_token)
+      services << :virus if services.empty?
+
+      services.map do |key|
+        available_services[key].call(path: file.body.path, endpoint: endpoint, api_token: api_token)
+      end
     end
+
+    private
+
+      def available_services
+        {
+          virus: VirusReportingService,
+          metadata: MetadataReportingService
+        }
+      end
   end
 end
