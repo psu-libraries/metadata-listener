@@ -37,13 +37,13 @@ RSpec.describe MetadataListener::FitsService do
     end
   end
 
-  context 'with errors during the HTTP request' do
-    before { ENV['FITS_ENDPOINT'] = 'http://localhost:8080/fits/wrong' }
+  context 'with errors during the FITs call' do
+    before { ENV['FITS_PATH'] = '/usr/share/fits/fits.broken' }
 
-    after { ENV['FITS_ENDPOINT'] = 'http://localhost:8080/fits/examine' }
+    after { ENV['FITS_PATH'] = '/usr/share/fits/fits.sh' }
 
     it 'raises an error' do
-      expect { service }.to raise_error(StandardError, 'HTTP Status 404 – Not Found')
+      expect { service }.to raise_error(StandardError)
     end
   end
 
