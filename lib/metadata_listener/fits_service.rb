@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'http'
-require 'nokogiri'
 require 'open3'
 
 module MetadataListener
