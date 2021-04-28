@@ -13,7 +13,7 @@ module MetadataListener
     def self.call(path)
       return {} unless Pathname.new(path).exist?
 
-      stdout, stderr, status = Open3.capture3("#{ENV.fetch("FITS_PATH", "/usr/share/fits/fits.sh")} -i #{path}" )
+      stdout, stderr, status = Open3.capture3("#{ENV.fetch('FITS_PATH', '/usr/share/fits/fits.sh')} -i #{path}")
       raise FitsError, stderr unless status.success?
 
       Hash.from_xml(stdout.to_s)
