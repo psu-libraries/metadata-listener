@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   release_image:
     docker:
-      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:v1.0.6
+      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:v1.1.0
     environment:
       REGISTRY_HOST: harbor.k8s.libraries.psu.edu
       REGISTRY_REPO: library/scholarsphere-metadata-listener
@@ -17,7 +17,7 @@ jobs:
             /usr/local/bin/tag-image
   build:
     docker:
-      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:v1.0.6
+      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:v1.1.0
     environment:
       REGISTRY_HOST: harbor.k8s.libraries.psu.edu
       REGISTRY_URL: harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener
