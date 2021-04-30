@@ -243,7 +243,6 @@ DEPENDENCIES
   guard-rspec (~> 4.7)
   http
   niftany
-  nokogiri (~> 1.10)
   pry
   rspec (~> 3.9)
   rspec-its (~> 1.3)
