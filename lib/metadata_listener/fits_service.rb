@@ -4,9 +4,9 @@ require 'http'
 require 'open3'
 
 module MetadataListener
-  class FitsService
-    class FitsError < StandardError; end
+  class FitsError < StandardError; end
 
+  class FitsService
     # @param [String] path of file to scan
     # @return [Hash] converted from the xml output
     def self.call(path)

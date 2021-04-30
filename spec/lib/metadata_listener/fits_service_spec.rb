@@ -37,17 +37,27 @@ RSpec.describe MetadataListener::FitsService do
     end
   end
 
-  context 'with errors during the FITs call' do
+  context 'when the Fits path does not exist' do
     before { ENV['FITS_PATH'] = '/usr/share/fits/fits.broken' }
 
     after { ENV['FITS_PATH'] = '/usr/share/fits/fits.sh' }
 
     it 'raises an error' do
-      expect { service }.to raise_error(StandardError)
+      expect { service }.to raise_error(Errno::ENOENT, 'No such file or directory - /usr/share/fits/fits.broken')
     end
   end
 
-  context 'when the path does not exist' do
+  context 'when the call to Fits is not a success' do
+    before { ENV['FITS_PATH'] = fixture_path.join('error_command.sh').to_s }
+
+    after { ENV['FITS_PATH'] = '/usr/share/fits/fits.sh' }
+
+    it 'raises a FitsError' do
+      expect { service }.to raise_error(MetadataListener::FitsError, "This command failed\n")
+    end
+  end
+
+  context 'when the file path does not exist' do
     let(:path) { '/not/here' }
 
     it { is_expected.to be_empty }
