@@ -17,6 +17,8 @@ module MetadataListener
       services.map do |key|
         available_services[key].call(path: file.body.path, endpoint: endpoint, api_token: api_token)
       end
+
+      File.delete(file.body.path) if File.exist?(file.body.path)
     end
 
     private
