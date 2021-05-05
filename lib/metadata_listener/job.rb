@@ -17,6 +17,8 @@ module MetadataListener
       services.map do |key|
         available_services[key].call(path: file.body.path, endpoint: endpoint, api_token: api_token)
       end
+
+      FileUtils.rm_f(file.body.path)
     end
 
     private
