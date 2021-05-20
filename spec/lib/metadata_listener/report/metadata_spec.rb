@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe MetadataListener::MetadataReportingService do
+RSpec.describe MetadataListener::Report::Metadata do
   let(:fits_data) { { 'fits' => { 'identity' => 'sample metadata' } } }
   let(:mock_logger) { instance_spy('Logger') }
 
   before do
-    allow(MetadataListener::FitsService).to receive(:call).and_return(fits_data)
+    allow(MetadataListener::Service::Fits).to receive(:call).and_return(fits_data)
     allow(MetadataListener).to receive(:logger).and_return(mock_logger)
   end
 

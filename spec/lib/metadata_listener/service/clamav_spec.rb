@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe MetadataListener::ClamavService do
+RSpec.describe MetadataListener::Service::Clamav do
   subject(:service) { described_class.call(path) }
 
   context 'when a virus is not present' do
