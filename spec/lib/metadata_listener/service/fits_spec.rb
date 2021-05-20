@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe MetadataListener::FitsService do
+RSpec.describe MetadataListener::Service::Fits do
   subject(:service) { described_class.call(path) }
 
   let(:path) { fixture_path.join('1.pdf').to_s }
@@ -53,7 +53,7 @@ RSpec.describe MetadataListener::FitsService do
     after { ENV['FITS_PATH'] = '/usr/share/fits/fits.sh' }
 
     it 'raises a FitsError' do
-      expect { service }.to raise_error(MetadataListener::FitsError, "This command failed\n")
+      expect { service }.to raise_error(MetadataListener::Service::FitsError, "This command failed\n")
     end
   end
 

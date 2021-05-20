@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe MetadataListener::Tika do
+RSpec.describe MetadataListener::Service::Tika do
   subject { described_class.new(path) }
 
   context 'with a pdf' do

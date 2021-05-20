@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe MetadataListener::VirusReportingService do
+RSpec.describe MetadataListener::Report::Virus do
   let(:mock_logger) { instance_spy('Logger') }
 
   before do
-    allow(MetadataListener::ClamavService).to receive(:call).and_return(false)
+    allow(MetadataListener::Service::Clamav).to receive(:call).and_return(false)
     allow(MetadataListener).to receive(:logger).and_return(mock_logger)
   end
 
@@ -16,7 +16,7 @@ RSpec.describe MetadataListener::VirusReportingService do
   end
 
   context 'when the file has a virus' do
-    before { allow(MetadataListener::ClamavService).to receive(:call).and_return(true) }
+    before { allow(MetadataListener::Service::Clamav).to receive(:call).and_return(true) }
 
     it 'logs failure message' do
       described_class.call(path: 'file_path')
