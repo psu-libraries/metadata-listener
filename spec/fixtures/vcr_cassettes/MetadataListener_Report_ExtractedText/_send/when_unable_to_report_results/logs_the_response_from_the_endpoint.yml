@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://scholarsphere-4.test/api/v1/files/1
+    body:
+      encoding: UTF-8
+      string: '{"derivatives":{"text":{"id":"6074b1e7-98f7-4541-944d-58bf0782d4af.txt","storage":"derivatives","metadata":{"size":14,"filename":"20210525-729-pei2pw.txt","mime_type":"text/plain"}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v1.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - c23f6374-5e03-44d8-a758-5865415df3be
+      X-Runtime:
+      - '0.009347'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"message":"401: Request not authorized. Please provide a valid API
+        key for access.","code":401}'
+  recorded_at: Tue, 25 May 2021 16:04:55 GMT
+recorded_with: VCR 6.0.0

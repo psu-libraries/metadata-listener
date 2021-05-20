@@ -16,6 +16,18 @@ module MetadataListener
       client.get_object(bucket: bucket, key: key, response_target: Tempfile.new)
     end
 
+    # @param [Pathname, File, IO] file
+    # @return [String] path to the uploaded file in the bucket
+    def upload_file(file:, store: ENV.fetch('CACHE_PREFIX', 'cache'))
+      source = Pathname.new(file)
+      key = "#{store}/#{SecureRandom.uuid.gsub(/-/, '')}#{source.extname}"
+
+      source.open do |body|
+        client.put_object(bucket: bucket, key: key, body: body)
+      end
+      key
+    end
+
     private
 
       def valid?

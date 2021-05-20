@@ -3,6 +3,7 @@
 module MetadataListener
   require 'metadata_listener/job'
   require 'metadata_listener/redis'
+  require 'metadata_listener/report/extracted_text'
   require 'metadata_listener/report/metadata'
   require 'metadata_listener/report/virus'
   require 'metadata_listener/s3_client'
