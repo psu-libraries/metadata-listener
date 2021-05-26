@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://scholarsphere-4.test/api/v1/files/1
+    body:
+      encoding: UTF-8
+      string: '{"derivatives":{"text":{"id":"7782d63c-b601-4b3f-a0f1-e5ee29ea26db.txt","storage":"derivatives","metadata":{"size":14,"filename":"20210525-729-1tq9tf7.txt","mime_type":"text/plain"}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      X-Api-Key:
+      - db9c21583ea98d16e42a73d9f78897c1ffc1dffcae781eb17f841cf421bd22b7a1a1228226437c5fdf6b6c9a8f537b17
+      User-Agent:
+      - Faraday v1.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept
+      Etag:
+      - W/"dc26fdcdd57abac4c20b12f6635117e7"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0bea337c-583d-4a29-8d51-867ae27c7511
+      X-Runtime:
+      - '0.016222'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"message":"File was successfully updated"}'
+  recorded_at: Tue, 25 May 2021 16:04:55 GMT
+recorded_with: VCR 6.0.0

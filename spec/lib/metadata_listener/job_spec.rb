@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe MetadataListener::Job do
-  let(:path) { upload_file(file: fixture_path.join('1.pdf')) }
+  let(:path) { MetadataListener.s3_client.upload_file(file: fixture_path.join('1.pdf')) }
 
   before do
     allow(MetadataListener::Report::Virus).to receive(:call)

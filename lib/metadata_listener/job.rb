@@ -15,7 +15,7 @@ module MetadataListener
       services << :virus if services.empty?
 
       services.map do |key|
-        available_reports[key].call(path: file.body.path, endpoint: endpoint, api_token: api_token)
+        report(key).call(path: file.body.path, endpoint: endpoint, api_token: api_token)
       end
 
       FileUtils.rm_f(file.body.path)
@@ -23,11 +23,13 @@ module MetadataListener
 
     private
 
-      def available_reports
-        {
-          virus: Report::Virus,
-          metadata: Report::Metadata
-        }
+      def report(key)
+        case key
+        when :metadata
+          MetadataListener::Report::Metadata
+        else
+          MetadataListener::Report.const_get(key.to_s.classify)
+        end
       end
   end
 end
