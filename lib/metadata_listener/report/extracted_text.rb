@@ -65,6 +65,7 @@ module MetadataListener
         def text_file
           @text_file ||= begin
                            file = Tempfile.new(['', '.txt'])
+                           file.binmode
                            file.write(Service::Tika.new(path).text)
                            file.close
                            Pathname.new(file)

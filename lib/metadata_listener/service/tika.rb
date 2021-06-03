@@ -13,7 +13,10 @@ module MetadataListener
       end
 
       def text
-        @text ||= rta.to_text.gsub(/\n+/, ' ')
+        return cleaned_text if cleaned_text.encoding.name == 'UTF-8'
+
+        MetadataListener.logger.warn('Text is not UTF-8 and cannot be used')
+        ''
       end
 
       def metadata
@@ -21,6 +24,10 @@ module MetadataListener
       end
 
       private
+
+        def cleaned_text
+          @cleaned_text ||= rta.to_text.gsub(/\n+/, ' ')
+        end
 
         def elements
           @elements ||= rta.to_metadata.split("\n")
