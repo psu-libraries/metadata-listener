@@ -7,7 +7,6 @@ jobs:
     environment:
       REGISTRY_HOST: harbor.k8s.libraries.psu.edu
       REGISTRY_REPO: library/scholarsphere-metadata-listener
-      DOCKER_USERNAME: 'robot$circleci'
       GITHUB_USER: 'psu-stewardship-bot'
     steps:
       - add_ssh_keys
@@ -17,11 +16,10 @@ jobs:
             /usr/local/bin/tag-image
   build:
     docker:
-      - image: devago/docker-compose
+      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:$CI_UTILS_IMG_TAG
     environment:
       REGISTRY_HOST: harbor.k8s.libraries.psu.edu
       REGISTRY_URL: harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener
-      DOCKER_USERNAME: 'robot$circleci'
     steps:
     - setup_remote_docker:
         version: 19.03.12
@@ -42,15 +40,19 @@ jobs:
     - run:
         name: "Publishing the image"
         command: |
-          docker login -u $DOCKER_USERNAME -p $HARBOR_PASSWORD $REGISTRY_HOST
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $REGISTRY_HOST
           docker push $REGISTRY_URL:$CIRCLE_SHA1
 
 workflows:
   version: 2
   metadata:
     jobs:
-      - build
+      - build:
+          context:
+            - org-global
       - release_image:
+          context:
+            - org-global
           name: "release image"
           filters:
             tags:
