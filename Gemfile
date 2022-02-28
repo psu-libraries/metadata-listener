@@ -10,7 +10,7 @@ gem 'ddtrace', '~> 0.36'
 gem 'faraday'
 gem 'http'
 gem 'ruby_tika_app', '~> 1.9'
-gem 'sidekiq', '~> 6.0'
+gem 'sidekiq', '~> 6.4'
 
 # Development gems
 # Since this isn't a Rails app, there really isn't a functional way to distinguish between dev/test gems and the gems
