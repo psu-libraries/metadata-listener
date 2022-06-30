@@ -110,7 +110,7 @@ GEM
     http-form_data (2.3.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.5.1)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
