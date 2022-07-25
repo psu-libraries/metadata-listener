@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip \
-  libmediainfo-dev openjdk-11-jre-headless=11.0.15+10-1~deb10u1 -y && \
+  libmediainfo-dev openjdk-11-jre-headless -y && \
   rm -rf /var/lib/apt/lists/*
 
 RUN curl -Lo /tmp/envconsul.zip https://releases.hashicorp.com/envconsul/0.9.2/envconsul_0.9.2_linux_amd64.zip && \
