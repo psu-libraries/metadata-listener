@@ -4,6 +4,7 @@ ENV TZ=America/New_York
 ENV LANG=C.UTF-8
 
 # System packages
+# hadolint ignore=DL3008
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip \
@@ -22,7 +23,7 @@ RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
 RUN freshclam
 
 # FITS!
-RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip \
+RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip \
   && mkdir -p /usr/share/fits \
   && mkdir -p /usr/share/man/man1 \
   && unzip /tmp/fits.zip -d /usr/share/fits \
@@ -35,7 +36,8 @@ WORKDIR /app
 USER clamav
 
 COPY --chown=clamav Gemfile Gemfile.lock /app/
-RUN gem install bundler
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 RUN bundle config set path vendor/bundle
 RUN bundle install && \
   rm -rf /app/.bundle/cache && \
