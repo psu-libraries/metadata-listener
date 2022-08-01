@@ -1,18 +1,15 @@
-FROM ruby:2.7.3 as base
+FROM ruby:2.7.6 as base
 
 ENV TZ=America/New_York
 ENV LANG=C.UTF-8
 
 # System packages
+# hadolint ignore=DL3008
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip \
   libmediainfo-dev openjdk-11-jre-headless -y && \
   rm -rf /var/lib/apt/lists/*
-
-RUN curl -Lo /tmp/envconsul.zip https://releases.hashicorp.com/envconsul/0.9.2/envconsul_0.9.2_linux_amd64.zip && \
-    unzip /tmp/envconsul.zip -d /bin && \
-    rm /tmp/envconsul.zip
 
 # ClamAV
 RUN mkdir /var/run/clamav && \
@@ -25,7 +22,6 @@ RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
 
 RUN freshclam
 
-# FITS!
 RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip \
   && mkdir -p /usr/share/fits \
   && mkdir -p /usr/share/man/man1 \
@@ -38,10 +34,11 @@ RUN mkdir /app && chown -R clamav /app
 WORKDIR /app
 USER clamav
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY --chown=clamav Gemfile Gemfile.lock /app/
-RUN gem install bundler
-RUN bundle config set path vendor/bundle
-RUN bundle install && \
+RUN gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)" && \
+  bundle config set path vendor/bundle && \
+  bundle install && \
   rm -rf /app/.bundle/cache && \
   rm -rf /app/vendor/bundle/ruby/*/cache
 
