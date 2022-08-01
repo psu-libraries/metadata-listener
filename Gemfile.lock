@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/psu-libraries/ruby_tika_app.git
+  revision: 91b0386feb5e0cb86f73f43553c0c7fd87ac7551
+  branch: tika-2.4.1
+  specs:
+    ruby_tika_app (2.4.1)
+      open4
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -199,8 +207,6 @@ GEM
       rubocop (~> 1.31)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    ruby_tika_app (1.9.0)
-      open4
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -250,7 +256,7 @@ DEPENDENCIES
   rspec (~> 3.9)
   rspec-its (~> 1.3)
   rubocop
-  ruby_tika_app (~> 1.9)
+  ruby_tika_app!
   sidekiq (~> 6.4)
   simplecov (= 0.17.1)
   vcr
