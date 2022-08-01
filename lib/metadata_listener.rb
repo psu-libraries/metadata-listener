@@ -14,7 +14,7 @@ module MetadataListener
   class << self
     # @note Because this is intended to run inside a Docker container, it is customary to write logs to STDOUT
     def logger
-      @logger ||= Logger.new(STDOUT)
+      @logger ||= Logger.new($stdout)
     end
 
     def s3_client

@@ -2,7 +2,7 @@
 
 RSpec.describe MetadataListener::Report::ExtractedText do
   let(:mock_tika) { instance_spy(MetadataListener::Service::Tika) }
-  let(:mock_logger) { instance_spy('Logger') }
+  let(:mock_logger) { instance_spy(Logger) }
   let(:extracted_text) { 'extracted text' }
 
   before do

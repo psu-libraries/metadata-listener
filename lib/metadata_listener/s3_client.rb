@@ -13,7 +13,7 @@ module MetadataListener
     # @param [String] key
     # @return [Seahorse::Client::Response]
     def download_file(key)
-      client.get_object(bucket: bucket, key: key, response_target: Tempfile.new)
+      client.get_object(bucket:, key:, response_target: Tempfile.new)
     end
 
     # @param [Pathname, File, IO] file
@@ -23,7 +23,7 @@ module MetadataListener
       key = "#{store}/#{SecureRandom.uuid.gsub(/-/, '')}#{source.extname}"
 
       source.open do |body|
-        client.put_object(bucket: bucket, key: key, body: body)
+        client.put_object(bucket:, key:, body:)
       end
       key
     end
@@ -39,7 +39,7 @@ module MetadataListener
       end
 
       def bucket
-        @bucket ||= ENV['AWS_BUCKET']
+        @bucket ||= ENV.fetch('AWS_BUCKET', nil)
       end
 
       def s3_options
@@ -52,8 +52,8 @@ module MetadataListener
 
       def base_options
         {
-          access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-          secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+          access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID', nil),
+          secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY', nil),
           region: ENV.fetch('AWS_REGION', 'us-east-1')
         }
       end

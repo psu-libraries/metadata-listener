@@ -41,7 +41,7 @@ class FitsConfig
       c.use :sidekiq, { analytics_enabled: true,
                         service_name: 'scholarsphere-metadata-listener' }
       c.use :redis
-      c.tracer env: ENV['DD_ENV']
+      c.tracer env: ENV.fetch('DD_ENV', nil)
     end
   end
 end

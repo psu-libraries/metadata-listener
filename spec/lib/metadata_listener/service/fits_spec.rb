@@ -30,7 +30,7 @@ RSpec.describe MetadataListener::Service::Fits do
 
     it 'extracts metadata from the file' do
       expect(
-        service.dig('fits', 'identification', 'identity').map { |identity| identity.dig('mimetype') }
+        service.dig('fits', 'identification', 'identity').map { |identity| identity['mimetype'] }
       ).to include(
         'application/vnd.openxmlformats-officedocument.presentationml.presentation'
       )

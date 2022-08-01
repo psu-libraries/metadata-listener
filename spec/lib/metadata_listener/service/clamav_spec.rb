@@ -23,7 +23,7 @@ RSpec.describe MetadataListener::Service::Clamav do
 
   context 'when clamscan returns a different exit code' do
     let(:path) { fixture_path.join('1.pdf').to_s }
-    let(:mock_command) { instance_spy('Clamby::Command') }
+    let(:mock_command) { instance_spy(Clamby::Command) }
 
     before do
       allow(Clamby::Command).to receive(:new).and_return(mock_command)

@@ -34,10 +34,10 @@ module MetadataListener
 
         def post_data
           @post_data ||= begin
-                           body = Hash.new
-                           body['metadata'] = Service::Fits.call(path)
-                           body
-                         end
+            body = Hash.new
+            body['metadata'] = Service::Fits.call(path)
+            body
+          end
         end
 
         def connection

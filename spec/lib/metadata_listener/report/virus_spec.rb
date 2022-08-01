@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe MetadataListener::Report::Virus do
-  let(:mock_logger) { instance_spy('Logger') }
+  let(:mock_logger) { instance_spy(Logger) }
 
   before do
     allow(MetadataListener::Service::Clamav).to receive(:call).and_return(false)

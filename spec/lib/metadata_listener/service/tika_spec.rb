@@ -32,8 +32,8 @@ RSpec.describe MetadataListener::Service::Tika do
   end
 
   context 'with a non UTF-8 document' do
-    let(:mock_tika) { instance_spy('RubyTikaApp') }
-    let(:mock_logger) { instance_spy('Logger') }
+    let(:mock_tika) { instance_spy(RubyTikaApp) }
+    let(:mock_logger) { instance_spy(Logger) }
 
     before do
       allow(RubyTikaApp).to receive(:new).and_return(mock_tika)
