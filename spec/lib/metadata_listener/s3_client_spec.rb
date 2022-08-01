@@ -11,7 +11,7 @@ RSpec.describe MetadataListener::S3Client do
 
     context 'with an invalid S3 configuration' do
       it 'raises an error' do
-        bucket = ENV['AWS_BUCKET']
+        bucket = ENV.fetch('AWS_BUCKET', nil)
         ENV['AWS_BUCKET'] = nil
 
         expect {

@@ -15,7 +15,7 @@ module MetadataListener
       services << :virus if services.empty?
 
       services.map do |key|
-        report(key).call(path: file.body.path, endpoint: endpoint, api_token: api_token)
+        report(key).call(path: file.body.path, endpoint:, api_token:)
       end
 
       FileUtils.rm_f(file.body.path)

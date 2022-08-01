@@ -14,11 +14,11 @@ class TestSetup
   end
 
   def clean_minio
-    client.list_objects(bucket: bucket).contents.map(&:key).map do |key|
-      client.delete_object(key: key, bucket: bucket)
+    client.list_objects(bucket:).contents.map(&:key).map do |key|
+      client.delete_object(key:, bucket:)
     end
   rescue Aws::S3::Errors::NoSuchBucket
-    client.create_bucket(bucket: bucket)
+    client.create_bucket(bucket:)
   end
 end
 

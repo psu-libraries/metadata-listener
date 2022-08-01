@@ -20,6 +20,6 @@ if ENV['DD_AGENT_HOST']
       service_name: 'scholarsphere-metadata-listener'
     }
     config.use :redis
-    config.tracer env: ENV['DD_ENV']
+    config.tracer env: ENV.fetch('DD_ENV', nil)
   end
 end
