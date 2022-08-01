@@ -19,6 +19,10 @@ Metrics/BlockLength:
     - 'Guardfile'
     - 'spec/**/*'
 
+Style/HashConversion:
+  Exclude:
+  - 'lib/metadata_listener/service/tika.rb'
+
 Style/MapToHash:
   Exclude:
   - 'lib/metadata_listener/service/tika.rb'
