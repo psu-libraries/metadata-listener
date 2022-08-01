@@ -18,7 +18,7 @@ gem 'sidekiq', '~> 6.4'
 
 gem 'guard', '~> 2.16'
 gem 'guard-rspec', '~> 4.7'
-gem 'niftany'
+gem 'niftany', '~> 0.10'
 gem 'pry'
 gem 'rspec', '~> 3.9'
 gem 'rspec-its', '~> 1.3'
@@ -26,5 +26,4 @@ gem 'simplecov', '0.17.1', require: false
 gem 'vcr', require: false
 gem 'webmock', require: false
 
-# Niftany needs to be update to work with version 0.84 and later
-gem 'rubocop', '< 0.84'
+gem 'rubocop'
