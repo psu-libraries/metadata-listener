@@ -123,7 +123,7 @@ GEM
     minitest (5.16.2)
     msgpack (1.5.4)
     nenv (0.3.0)
-    niftany (0.10.0)
+    niftany (0.10.1)
       colorize (~> 0.8.1)
       erb_lint (~> 0.0.22)
       rubocop (~> 1.3)
