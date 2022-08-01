@@ -1,4 +1,4 @@
-FROM ruby:2.7.6 as base
+FROM ruby:3.1.2 as base
 
 ENV TZ=America/New_York
 ENV LANG=C.UTF-8
