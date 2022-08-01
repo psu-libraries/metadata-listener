@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/psu-libraries/ruby_tika_app.git
-  revision: 91b0386feb5e0cb86f73f43553c0c7fd87ac7551
+  revision: b1aff99a6806c1330ee69f396ad5c273a4f18307
   branch: tika-2.4.1
   specs:
     ruby_tika_app (2.4.1)
