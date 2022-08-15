@@ -27,7 +27,9 @@ RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download
   && mkdir -p /usr/share/fits \
   && mkdir -p /usr/share/man/man1 \
   && unzip /tmp/fits.zip -d /usr/share/fits \
-  && rm -rf /tmp/fits.zip
+  && rm -rf /tmp/fits.zip \
+  && rm -rf /usr/share/fits/lib/droid/log4j* \
+  && rm -rf /usr/share/fits/lib/log4j* 
 
 
 RUN mkdir /app && chown -R clamav /app
