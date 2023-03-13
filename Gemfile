@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'activejob', '~> 6.0'
+gem 'activejob', '~> 6.1.7.2'
 gem 'aws-sdk-s3', '~> 1.60'
 gem 'clamby', '~> 1.6'
 gem 'ddtrace', '~> 0.36'
@@ -18,7 +18,7 @@ gem 'sidekiq', '~> 6.4'
 
 gem 'guard', '~> 2.16'
 gem 'guard-rspec', '~> 4.7'
-gem 'niftany', '~> 0.10'
+gem 'niftany', git: 'https://github.com/psu-libraries/niftany.git', branch: 'update-erb-lint'
 gem 'pry'
 gem 'rspec', '~> 3.9'
 gem 'rspec-its', '~> 1.3'
