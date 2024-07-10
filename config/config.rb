@@ -34,14 +34,18 @@ class FitsConfig
   def redis_url
     "redis://#{redis_host}:#{redis_port}/#{redis_database}"
   end
+end
 
-  if ENV['DD_AGENT_HOST']
-    require 'ddtrace'
-    Datadog.configure do |c|
-      c.use :sidekiq, { analytics_enabled: true,
-                        service_name: 'scholarsphere-metadata-listener' }
-      c.use :redis
-      c.tracer env: ENV.fetch('DD_ENV', nil)
-    end
+# Initialize Bugsnag
+require 'bugsnag'
+
+Bugsnag.configure do |config|
+  config.app_version = ENV.fetch('APP_VERSION', nil)
+  config.release_stage = ENV.fetch('BUGSNAG_RELEASE_STAGE', 'development')
+end
+
+at_exit do
+  if $!
+    Bugsnag.notify($!)
   end
 end
