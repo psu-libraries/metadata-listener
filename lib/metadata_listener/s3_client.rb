@@ -20,7 +20,7 @@ module MetadataListener
     # @return [String] path to the uploaded file in the bucket
     def upload_file(file:, store: ENV.fetch('CACHE_PREFIX', 'cache'))
       source = Pathname.new(file)
-      key = "#{store}/#{SecureRandom.uuid.gsub(/-/, '')}#{source.extname}"
+      key = "#{store}/#{SecureRandom.uuid.gsub('-', '')}#{source.extname}"
 
       source.open do |body|
         client.put_object(bucket:, key:, body:)
