@@ -35,17 +35,3 @@ class FitsConfig
     "redis://#{redis_host}:#{redis_port}/#{redis_database}"
   end
 end
-
-# Initialize Bugsnag
-require 'bugsnag'
-
-Bugsnag.configure do |config|
-  config.app_version = ENV.fetch('APP_VERSION', nil)
-  config.release_stage = ENV.fetch('BUGSNAG_RELEASE_STAGE', 'development')
-end
-
-at_exit do
-  if $!
-    Bugsnag.notify($!)
-  end
-end

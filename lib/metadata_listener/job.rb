@@ -11,6 +11,7 @@ module MetadataListener
     # @param [String] api_token used to authenticate with endpoint
     # @param [Array<Symbol>] reporting services to run, defaults to []
     def perform(path:, endpoint: nil, api_token: nil, services: [])
+      raise 'error'
       file = MetadataListener.s3_client.download_file(path)
       services << :virus if services.empty?
 
