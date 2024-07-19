@@ -5,8 +5,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'activejob', '~> 6.0'
 gem 'aws-sdk-s3', '~> 1.60'
+gem 'bugsnag'
 gem 'clamby', '~> 1.6'
-gem 'ddtrace', '~> 0.36'
 gem 'faraday'
 gem 'http'
 gem 'ruby_tika_app', git: 'https://github.com/psu-libraries/ruby_tika_app.git', branch: 'tika-2.4.1'

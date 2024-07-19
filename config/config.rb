@@ -34,14 +34,4 @@ class FitsConfig
   def redis_url
     "redis://#{redis_host}:#{redis_port}/#{redis_database}"
   end
-
-  if ENV['DD_AGENT_HOST']
-    require 'ddtrace'
-    Datadog.configure do |c|
-      c.use :sidekiq, { analytics_enabled: true,
-                        service_name: 'scholarsphere-metadata-listener' }
-      c.use :redis
-      c.tracer env: ENV.fetch('DD_ENV', nil)
-    end
-  end
 end
