@@ -1,4 +1,4 @@
-FROM ruby:3.1.2 as base
+FROM ruby:3.1.6 as base
 
 ENV TZ=America/New_York
 ENV LANG=C.UTF-8
@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip \
-  libmediainfo-dev openjdk-11-jre-headless -y && \
+  libmediainfo-dev openjdk-17-jre-headless -y && \
   rm -rf /var/lib/apt/lists/*
 
 # ClamAV
