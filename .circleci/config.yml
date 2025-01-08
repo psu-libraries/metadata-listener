@@ -21,8 +21,7 @@ jobs:
       REGISTRY_HOST: harbor.k8s.libraries.psu.edu
       REGISTRY_URL: harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener
     steps:
-    - setup_remote_docker:
-        version: default 
+    - setup_remote_docker
     - checkout
     - run:
         name: "Build Docker Container"
