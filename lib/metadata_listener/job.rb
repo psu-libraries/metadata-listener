@@ -5,6 +5,7 @@ require 'active_job'
 module MetadataListener
   class Job < ActiveJob::Base
     queue_as :metadata
+    sidekiq_options timeout: 1800
 
     # @param [String] path indicating where the file is stored in S3
     # @param [String] endpoint to send results to
