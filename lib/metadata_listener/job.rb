@@ -21,9 +21,9 @@ module MetadataListener
 
         FileUtils.rm_f(file.body.path)
       end
-    rescue
-      Bugsnag.notify("MetadataListener timed out.  SideKiq jid: #{jid}")
-      raise
+    rescue Timeout => e
+      Bugsnag.notify("MetadataListener timed out. SideKiq jid: #{jid}")
+      raise e
     end
 
     private
