@@ -4,6 +4,7 @@ require 'active_job'
 
 module MetadataListener
   class Job < ActiveJob::Base
+    include Sidekiq::Worker
     queue_as :metadata
     sidekiq_options timeout: 1800
 
