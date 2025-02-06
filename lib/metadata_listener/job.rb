@@ -4,23 +4,26 @@ require 'active_job'
 
 module MetadataListener
   class Job < ActiveJob::Base
-    include Sidekiq::Worker
     queue_as :metadata
-    sidekiq_options timeout: 1800
 
     # @param [String] path indicating where the file is stored in S3
     # @param [String] endpoint to send results to
     # @param [String] api_token used to authenticate with endpoint
     # @param [Array<Symbol>] reporting services to run, defaults to []
     def perform(path:, endpoint: nil, api_token: nil, services: [])
-      file = MetadataListener.s3_client.download_file(path)
-      services << :virus if services.empty?
+      Timeout.timeout(1800) do
+        file = MetadataListener.s3_client.download_file(path)
+        services << :virus if services.empty?
 
-      services.map do |key|
-        report(key).call(path: file.body.path, endpoint:, api_token:)
+        services.map do |key|
+          report(key).call(path: file.body.path, endpoint:, api_token:)
+        end
+
+        FileUtils.rm_f(file.body.path)
       end
-
-      FileUtils.rm_f(file.body.path)
+    rescue
+      Bugsnag.notify("MetadataListener timed out.  SideKiq jid: #{jid}")
+      raise
     end
 
     private
