@@ -21,7 +21,7 @@ module MetadataListener
 
         FileUtils.rm_f(file.body.path)
       end
-    rescue Timeout => e
+    rescue Timeout::Error => e
       Bugsnag.notify("MetadataListener timed out. SideKiq jid: #{jid}")
       raise e
     end
