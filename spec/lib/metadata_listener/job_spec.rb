@@ -33,4 +33,15 @@ RSpec.describe MetadataListener::Job do
       )
     end
   end
+
+  context 'when the job reaches timeout' do
+    before do
+      allow(MetadataListener::Report::Virus).to receive(:call).and_return(sleep(10))
+    end
+
+    it 'raises Timeout::Error' do
+      stup_const('MetadataListener::Job::TIMEOUT', 3)
+      expect { described_class.perform_now(path:) }.to raise_error(Timeout::Error)
+    end
+  end
 end

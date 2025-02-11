@@ -5,13 +5,14 @@ require 'active_job'
 module MetadataListener
   class Job < ActiveJob::Base
     queue_as :metadata
+    TIMEOUT = 1800
 
     # @param [String] path indicating where the file is stored in S3
     # @param [String] endpoint to send results to
     # @param [String] api_token used to authenticate with endpoint
     # @param [Array<Symbol>] reporting services to run, defaults to []
     def perform(path:, endpoint: nil, api_token: nil, services: [])
-      Timeout.timeout(1800) do
+      Timeout.timeout(TIMEOUT) do
         file = MetadataListener.s3_client.download_file(path)
         services << :virus if services.empty?
 
