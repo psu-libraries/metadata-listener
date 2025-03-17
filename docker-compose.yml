@@ -30,8 +30,8 @@ services:
     volumes:
       - minio-data:/data
     environment: 
-      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-listener}
-      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
+      MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID:-listener}
+      MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY:-listener}
     ports:
       - ${MINIO_PORT:-9000}:9000
     entrypoint:

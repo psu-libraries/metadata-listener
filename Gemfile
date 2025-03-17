@@ -18,6 +18,7 @@ gem 'sidekiq', '~> 7.0'
 
 gem 'guard', '~> 2.16'
 gem 'guard-rspec', '~> 4.7'
+gem 'mutex_m', '~> 0.3'
 gem 'niftany', '~> 0.10'
 gem 'pry'
 gem 'rspec', '~> 3.9'
