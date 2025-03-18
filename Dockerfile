@@ -1,4 +1,4 @@
-FROM ruby:3.1.6-bookworm as base
+FROM ruby:3.4.1-bookworm as base
 
 ENV TZ=America/New_York
 ENV LANG=C.UTF-8
