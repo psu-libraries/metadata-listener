@@ -145,7 +145,7 @@ GEM
       rubocop-rails (~> 2.3)
       rubocop-rspec (~> 2)
       scss_lint (~> 0.55)
-    nokogiri (1.18.9)
+    nokogiri (1.19.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     notiffany (0.1.3)
