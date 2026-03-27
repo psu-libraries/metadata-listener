@@ -1,4 +1,4 @@
-FROM ruby:3.4.1-bookworm as base
+FROM ruby:3.4.9-bookworm AS base
 
 ENV TZ=America/New_York
 ENV LANG=C.UTF-8
@@ -29,7 +29,7 @@ RUN curl -Lo /tmp/fits.zip https://github.com/harvard-lts/fits/releases/download
   && unzip /tmp/fits.zip -d /usr/share/fits \
   && rm -rf /tmp/fits.zip \
   && rm -rf /usr/share/fits/lib/droid/log4j* \
-  && rm -rf /usr/share/fits/lib/log4j* 
+  && rm -rf /usr/share/fits/lib/log4j*
 
 
 RUN mkdir /app && chown -R clamav /app
