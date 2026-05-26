@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-require 'active_job'
+require 'sidekiq'
+require 'active_support/all'
 
 module MetadataListener
-  class Job < ActiveJob::Base
+  class Job
+    include Sidekiq::Job
+
     queue_as :metadata
 
     # @param [String] path indicating where the file is stored in S3
