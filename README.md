@@ -18,7 +18,7 @@ Occasionally you'll need to rebuild the container, it's a good idea to rebuild a
 ```
 docker-compose build
 # or as one single step to build & run
-docker-compuse up --build -d
+docker-compose up --build -d
 ```
 
 # Run 
@@ -48,3 +48,22 @@ from outside the container:
 ```
 docker-compose down
 ```
+
+# Enqueue metadata listener jobs
+This worker uses Sidekiq::Job and expects one JSON payload hash argument.
+
+Use string keys and JSON-safe values:
+
+```
+MetadataListener::Job.perform_async(
+	'path' => 'uploads/1.pdf',
+	'endpoint' => 'https://example.edu/metadata',
+	'api_token' => 'token-value',
+	'services' => ['metadata', 'virus']
+)
+```
+
+Notes:
+- path is required.
+- services should be an array of strings (not symbols).
+- if services is missing or empty, the job defaults to virus scanning.

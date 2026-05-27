@@ -7,13 +7,14 @@ module MetadataListener
   class Job
     include Sidekiq::Job
 
-    queue_as :metadata
+    sidekiq_options queue: :metadata
 
-    # @param [String] path indicating where the file is stored in S3
-    # @param [String] endpoint to send results to
-    # @param [String] api_token used to authenticate with endpoint
-    # @param [Array<Symbol>] reporting services to run, defaults to []
-    def perform(path:, endpoint: nil, api_token: nil, services: [])
+    # @param [Hash] payload JSON-serializable payload from Sidekiq
+    def perform(payload)
+      path = payload.fetch('path')
+      endpoint, api_token, services = payload.values_at('endpoint', 'api_token', 'services')
+      services = Array(services).map(&:to_sym)
+
       file = MetadataListener.s3_client.download_file(path)
       services << :virus if services.empty?
 
