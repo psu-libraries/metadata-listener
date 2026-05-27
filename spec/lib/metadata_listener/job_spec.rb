@@ -8,11 +8,17 @@ RSpec.describe MetadataListener::Job do
     allow(MetadataListener::Report::Metadata).to receive(:call)
   end
 
-  it { is_expected.to be_an(ActiveJob::Base) }
+  it 'responds to perform_async' do
+    expect(described_class).to respond_to(:perform_async)
+  end
+
+  it 'includes Sidekiq::Job' do
+    expect(described_class.included_modules).to include(Sidekiq::Job)
+  end
 
   context 'without requesting any specific services' do
     it 'calls the virus report by default' do
-      described_class.perform_now(path:)
+      described_class.new.perform(path:)
       expect(MetadataListener::Report::Metadata).not_to have_received(:call)
       expect(MetadataListener::Report::Virus).to have_received(:call).with(
         path: a_kind_of(String),
@@ -24,7 +30,7 @@ RSpec.describe MetadataListener::Job do
 
   context 'when requesting a metadata report' do
     it 'calls the metadata report' do
-      described_class.perform_now(path:, services: [:metadata])
+      described_class.new.perform(path:, services: [:metadata])
       expect(MetadataListener::Report::Virus).not_to have_received(:call)
       expect(MetadataListener::Report::Metadata).to have_received(:call).with(
         path: a_kind_of(String),
