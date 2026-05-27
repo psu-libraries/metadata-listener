@@ -22,6 +22,15 @@ RSpec.describe MetadataListener::Job do
     expect(described_class.included_modules).to include(Sidekiq::Job)
   end
 
+  it 'enqueues jobs on the metadata queue' do
+    Sidekiq::Testing.fake! do
+      described_class.clear
+      described_class.perform_async('path' => path)
+
+      expect(described_class.jobs.last['queue']).to eq('metadata')
+    end
+  end
+
   context 'without requesting any specific services' do
     it 'calls the virus report by default' do
       described_class.perform_async('path' => path)
