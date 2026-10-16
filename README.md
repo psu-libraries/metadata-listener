@@ -22,7 +22,7 @@ docker-compose up --build -d
 ```
 
 # Run 
-Requires scholarsphere to be running, or at the very least a redis instance, and minio instance for the queue to connect to
+Requires scholarsphere to be running, or at the very least a redis instance, and seaweedfs instance for the queue to connect to
 
 ```
 docker-compose up -d 
