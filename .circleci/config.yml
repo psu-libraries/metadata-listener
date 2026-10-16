@@ -3,9 +3,9 @@ version: 2.1
 jobs:
   release_image:
     docker:
-      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:$CI_UTILS_IMG_TAG
+      - image: harbor.libraries.psu.edu/library/ci-utils:$CI_UTILS_IMG_TAG
     environment:
-      REGISTRY_HOST: harbor.k8s.libraries.psu.edu
+      REGISTRY_HOST: harbor.libraries.psu.edu
       REGISTRY_REPO: library/scholarsphere-metadata-listener
       GITHUB_USER: 'psu-stewardship-bot'
     steps:
@@ -16,10 +16,10 @@ jobs:
             /usr/local/bin/tag-image
   build:
     docker:
-      - image: harbor.k8s.libraries.psu.edu/library/ci-utils:$CI_UTILS_IMG_TAG
+      - image: harbor.libraries.psu.edu/library/ci-utils:$CI_UTILS_IMG_TAG
     environment:
-      REGISTRY_HOST: harbor.k8s.libraries.psu.edu
-      REGISTRY_URL: harbor.k8s.libraries.psu.edu/library/scholarsphere-metadata-listener
+      REGISTRY_HOST: harbor.libraries.psu.edu
+      REGISTRY_URL: harbor.libraries.psu.edu/library/scholarsphere-metadata-listener
     steps:
     - setup_remote_docker
     - checkout
