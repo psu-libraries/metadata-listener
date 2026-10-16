@@ -2,7 +2,7 @@
 
 class TestSetup
   def self.prepare
-    new.clean_minio
+    new.clean_seaweedfs
   end
 
   attr_reader :client, :bucket
@@ -13,7 +13,7 @@ class TestSetup
     @bucket = s3.send(:bucket)
   end
 
-  def clean_minio
+  def clean_seaweedfs
     client.list_objects(bucket:).contents.map(&:key).map do |key|
       client.delete_object(key:, bucket:)
     end
