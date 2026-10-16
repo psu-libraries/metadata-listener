@@ -8,7 +8,7 @@ ENV LANG=C.UTF-8
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install --no-install-recommends clamav clamdscan clamav-daemon libstdc++6 libffi-dev wget libpng-dev make curl unzip \
-  libmediainfo-dev openjdk-17-jre-headless -y && \
+  libmediainfo-dev openjdk-21-jdk-headless -y && \
   rm -rf /var/lib/apt/lists/*
 
 # ClamAV
