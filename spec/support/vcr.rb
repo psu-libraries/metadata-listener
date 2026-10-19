@@ -9,7 +9,7 @@ VCR.configure do |c|
   c.allow_http_connections_when_no_cassette = true
   c.ignore_localhost = true
   c.ignore_request do |request|
-    URI(request.uri).port == 9000
+    URI(request.uri).port == 8333
   end
   c.debug_logger = File.open('log/vcr.log', 'w')
 end
