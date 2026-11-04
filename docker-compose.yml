@@ -3,8 +3,10 @@ services:
   listener:
     tty: true
     stdin_open: true
+    depends_on:
+      - seaweedfs
     environment:
-      S3_ENDPOINT: ${S3_ENDPOINT:-http://host.docker.internal:8333}
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://seaweedfs:8333}
       AWS_REGION: ${AWS_REGION:-us-east-1}
       AWS_BUCKET: ${AWS_BUCKET:-listener}
       REDIS_HOST: ${REDIS_HOST}
