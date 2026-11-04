@@ -4,7 +4,8 @@ services:
     tty: true
     stdin_open: true
     depends_on:
-    - seaweedfs
+      seaweedfs:
+        condition: service_healthy
     environment:
       CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
       GIT_COMMIT_SHA: ${CIRCLE_SHA1}

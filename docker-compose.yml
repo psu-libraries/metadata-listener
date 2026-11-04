@@ -4,7 +4,8 @@ services:
     tty: true
     stdin_open: true
     depends_on:
-      - seaweedfs
+      seaweedfs:
+        condition: service_healthy
     environment:
       S3_ENDPOINT: ${S3_ENDPOINT:-http://seaweedfs:8333}
       AWS_REGION: ${AWS_REGION:-us-east-1}
@@ -36,6 +37,12 @@ services:
       - 8888:8888
     volumes:
       - seaweedfs-data:/data
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8333"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
 
 volumes:
   var-lib-clamav:
