@@ -13,7 +13,12 @@ module MetadataListener
     # @param [String] key
     # @return [Seahorse::Client::Response]
     def download_file(key)
-      client.get_object(bucket:, key:, response_target: Tempfile.new)
+      temp_file = Tempfile.new
+      response = client.get_object(bucket:, key:, response_target: temp_file)
+      # Ensure the tempfile is flushed to disk immediately
+      # This prevents the file from being garbage collected before it's used
+      response.body.flush
+      response
     end
 
     # @param [Pathname, File, IO] file
