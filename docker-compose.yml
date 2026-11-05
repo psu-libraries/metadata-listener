@@ -3,8 +3,11 @@ services:
   listener:
     tty: true
     stdin_open: true
+    depends_on:
+      seaweedfs:
+        condition: service_healthy
     environment:
-      S3_ENDPOINT: ${S3_ENDPOINT:-http://host.docker.internal:8333}
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://seaweedfs:8333}
       AWS_REGION: ${AWS_REGION:-us-east-1}
       AWS_BUCKET: ${AWS_BUCKET:-listener}
       REDIS_HOST: ${REDIS_HOST}
@@ -12,10 +15,10 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-listener}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
     command: |
-      /bin/bash -c 
-      "bundle check || bundle install && 
+      /bin/bash -c
+      "bundle check || bundle install &&
       sleep infinity"
-    build: 
+    build:
       context: .
     volumes:
     - var-lib-clamav:/var/lib/clamav
@@ -25,8 +28,8 @@ services:
       source: .
       target: /app/
   seaweedfs:
-    image: chrislusf/seaweedfs:latest
-    environment: 
+    image: chrislusf/seaweedfs:4.52
+    environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-listener}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-listener}
     ports:
@@ -34,6 +37,12 @@ services:
       - 8888:8888
     volumes:
       - seaweedfs-data:/data
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8333"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
 
 volumes:
   var-lib-clamav:

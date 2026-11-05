@@ -63,12 +63,18 @@ module MetadataListener
         end
 
         def text_file
-          @text_file ||= begin
+          @text_file ||= Pathname.new(text_tempfile.path)
+        end
+
+        # Retain the Tempfile itself, not just its path, so it isn’t garbage
+        # collected before later reads. Especially during slow processing.
+        def text_tempfile
+          @text_tempfile ||= begin
             file = Tempfile.new(['', '.txt'])
             file.binmode
             file.write(Service::Tika.new(path).text)
             file.close
-            Pathname.new(file)
+            file
           end
         end
 
