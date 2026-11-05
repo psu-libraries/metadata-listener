@@ -63,12 +63,22 @@ module MetadataListener
         end
 
         def text_file
-          @text_file ||= begin
+          @text_file ||= Pathname.new(text_tempfile.path)
+        end
+
+        # Holds the only strong reference to the Tempfile. Without it, the Tempfile
+        # object becomes unreachable as soon as this method returns (only its path
+        # string survives via text_file), making it eligible for GC at any point.
+        # Ruby unlinks a Tempfile's backing file from a finalizer when the object is
+        # collected, which intermittently deleted the file out from under later
+        # reads (text_file.size, text_file.basename) on large, slow-to-process files.
+        def text_tempfile
+          @text_tempfile ||= begin
             file = Tempfile.new(['', '.txt'])
             file.binmode
             file.write(Service::Tika.new(path).text)
             file.close
-            Pathname.new(file)
+            file
           end
         end
 
