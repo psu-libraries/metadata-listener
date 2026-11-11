@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'activesupport', '~> 7.0'
+gem 'activesupport', '~> 8.0'
 gem 'aws-sdk-s3', '~> 1.60'
 gem 'bugsnag'
 gem 'clamby', '~> 1.6'
